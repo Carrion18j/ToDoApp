@@ -4,9 +4,9 @@ import { db } from "../config/firebaseConfig";
 import { deleteDoc, updateDoc, doc } from "firebase/firestore";
 
 const TodoItem = ({ data, getTasksList }) => {
-  const { description, date: newDate, title, state, id } = data;
+  const { description, date: newDate, title, status, id } = data;
 
-  const [newState, setNewState] = useState(!state);
+  const [newState, setNewState] = useState(!status);
 
   const deleteTask = async () => {
     try {
@@ -33,34 +33,49 @@ const TodoItem = ({ data, getTasksList }) => {
     updateState();
   };
 
+  const final_Date = new Date(newDate?.seconds * 1000);
+  const date = final_Date.getDate();
+  const day = final_Date.getDay();
+  const year = final_Date.getFullYear();
+  const weekDays = [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday",
+  ];
+  const finalDate = `${date} / ${weekDays[day]} / ${year}`;
+
   return (
-    <div className="mt-[20px] bg-yellow-300 py-[18px] px-[8px] rounded-[18px] flex w-[70vw] justify-between ">
-      <div className="ml-[28px]">
-        <h2 className=" font-semibold text-[28px]">{title}</h2>
+    <div className="mt-[20px] bg-blue-200 py-[18px] px-[8px] rounded-[18px] flex flex-wrap md:justify-around justify-between md:max-w-[68%]">
+      <div className="flex flex-col flex-wrap ">
+        <h2 className=" font-bold text-[2.6rem]">{title} :</h2>
         <p className=" font-medium max-w-[50%]">{description} </p>
       </div>
-      <div className=" mr-[28px]">
+      <div className="flex flex-col flex-wrap sm:mt-0 mt-[30px]">
         <div className="flex mb-[10px]">
           <h4 className="mr-[10px] flex justify-center items-center text-[22px] font-medium">
-            Date :
+            Date :
           </h4>
           <h4 className="bg-black text-white p-[6px] text-[20px] rounded-[14px]">
-            {newDate}
+            {finalDate}
           </h4>
         </div>
         <div className="flex mb-[10px]">
           <h4 className="mr-[10px] flex justify-center items-center text-[22px] font-medium">
-            Status :
+            Status :
           </h4>
           <button
             onClick={doneHandler}
             className="bg-black text-white p-[6px] text-[20px] rounded-[14px]"
           >
-            Done : &nbsp; {!newState ? "Yes" : "No"}
+            {!newState ? "Done" : "Not-Done"}
           </button>
         </div>
         <button
-          className="bg-red-400 rounded-[16px] p-[8px] text-[22px] font-semibold inline-block min-w-[200px]"
+          className="border-[1px] border-black rounded-[16px] p-[8px] text-[22px] font-semibold inline-block min-w-[200px]"
           onClick={deleteTask}
         >
           delete
