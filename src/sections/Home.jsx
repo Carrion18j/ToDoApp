@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, TodoItem } from "../components";
 import { db } from "../config/firebaseConfig";
 import { signOutFromGoogle } from "../config/Auth";
@@ -14,6 +14,7 @@ import { RiCalendarTodoFill } from "react-icons/ri";
 
 const Home = () => {
   const [tasks, setTasks] = useState([]);
+
   const [tasktitle, setTasktitle] = useState("");
   const [taskDec, setTaskDec] = useState("");
   const [date, setDate] = useState(0);
@@ -32,7 +33,7 @@ const Home = () => {
         id: item.id,
       }));
 
-      setTasks(() => [...filteredData]);
+      setTasks([...filteredData]);
     } catch (err) {
       console.error(err);
     }
@@ -57,7 +58,7 @@ const Home = () => {
   };
 
   useEffect(() => {
-    if (tasktitle && date && taskDec && doneOrNot) onSubmitTask();
+    if (tasktitle && date && taskDec) onSubmitTask();
   }, [tasktitle, date, taskDec, doneOrNot]);
 
   const ButtonFormData = ({ date, description, state, title }) => {
@@ -66,7 +67,6 @@ const Home = () => {
     setDate(date);
     setDoneOrNot(state);
   };
-
 
   return (
     <section className="bg-gray-500 overflow-hidden flex justify-center min-h-[100vh]">
@@ -114,7 +114,9 @@ const Home = () => {
             <Button title={"+ To-Do Item "} data={ButtonFormData} />
             <div className="flex flex-col">
               {tasks.map((task, key) => {
-                return <TodoItem data={task} key={key} />;
+                return (
+                  <TodoItem data={task} key={key} getTasksList={getTasksList} />
+                );
               })}
             </div>
           </div>
@@ -125,3 +127,4 @@ const Home = () => {
 };
 
 export default Home;
+tasktitle, date, taskDec, doneOrNot

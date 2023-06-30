@@ -33,21 +33,6 @@ const TodoItem = ({ data, getTasksList }) => {
     updateState();
   };
 
-  const final_Date = new Date(newDate?.seconds * 1000);
-  const date = final_Date.getDate();
-  const day = final_Date.getDay();
-  const year = final_Date.getFullYear();
-  const weekDays = [
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-    "Sunday",
-  ];
-  const finalDate = `${date} / ${weekDays[day]} / ${year}`;
-
   return (
     <div className="mt-[20px] bg-blue-200 py-[18px] px-[8px] rounded-[18px] flex flex-wrap md:justify-around justify-between md:max-w-[68%]">
       <div className="flex flex-col flex-wrap ">
@@ -60,7 +45,7 @@ const TodoItem = ({ data, getTasksList }) => {
             Date :
           </h4>
           <h4 className="bg-black text-white p-[6px] text-[20px] rounded-[14px]">
-            {finalDate}
+            {`${newDate}`}
           </h4>
         </div>
         <div className="flex mb-[10px]">

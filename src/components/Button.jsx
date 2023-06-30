@@ -2,17 +2,15 @@ import React, { useState } from "react";
 import { FormWindow } from "../components";
 
 const Button = ({ title, data, style }) => {
-  const [newFormWindow, setNewFormWindow] = useState(false);
-  const [newFormData, setNewFormData] = useState([]);
+  const [formView, setFormViwe] = useState(false);
 
-  const ButtonOnClickHandler = () => setNewFormWindow(true);
-  const DivClickHandler = () => setNewFormWindow(false);
-  const FormSubmitHandler = (e) => {
-    data(newFormData);
-    setNewFormWindow(e);
+  const ButtonOnClickHandler = () => setFormViwe(true);
+  const DivClickHandler = () => setFormViwe(false);
+  const FormSubmitHandler = () => {
+    setFormViwe(false);
   };
   const FormData = (e) => {
-    setNewFormData({ ...e });
+    data(e);
   };
 
   return (
@@ -23,13 +21,13 @@ const Button = ({ title, data, style }) => {
       >
         {title}
       </button>
-      {newFormWindow && (
+      {formView && (
         <div className="flex justify-center w-[100vw] h-[100%] items-center absolute top-0 right-0">
           <div
             className="w-[100vw] h-[100%] opacity-25 bg-black absolute top-0 right-0"
             onClick={DivClickHandler}
           />
-          <FormWindow data={FormData} formSubmitHandler={FormSubmitHandler} />
+          <FormWindow data={FormData} formSubmiter={FormSubmitHandler} />
         </div>
       )}
     </div>
