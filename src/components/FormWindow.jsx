@@ -20,7 +20,6 @@ const FormWindow = ({ data, formSubmitHandler }) => {
     return () => clearTimeout(timer);
   };
 
-  
   class dataBlueprint {
     constructor(state, description, date, title) {
       this.state = state;
@@ -49,8 +48,59 @@ const FormWindow = ({ data, formSubmitHandler }) => {
   };
 
   return (
-    <form className=" bg-gray-500 text-[28px] p-[28px] flex flex-col justify-around text-black rounded-[16px] opacity-100 max-w-[80vh] w-[60vw] aspect-[1] z-[100]">
-      
+    <form className=" bg-blue-400 text-[28px] p-[14px] flex flex-col justify-between text-black rounded-[16px] opacity-100 max-w-[80vh] w-[60vw] aspect-[1] z-[100]">
+      <div className="">
+        <h1 className="text-[3rem] font-semibold text-white">Add To-Do</h1>
+      </div>
+      <div className="flex flex-col gap-[10px] lg:gap-[40px]">
+        <div className="flex justify-between">
+          <label htmlFor="title">Title: </label>
+          <input
+            type="text"
+            id="title"
+            placeholder="Title"
+            className="rounded-[6px] p-[6px] max-w-[60%]"
+            value={title}
+            onChange={TitleHandler}
+          />
+        </div>
+        <div className="flex  justify-between">
+          <label htmlFor="description">Description: </label>
+          <input
+            type="text"
+            id="description"
+            placeholder="Description"
+            className="rounded-[6px] p-[6px] max-w-[60%]"
+            onChange={DescriptionHandler}
+          />
+        </div>
+        <div className="flex justify-between">
+          <label htmlFor="dateInput">Date: </label>
+          <input
+            type="date"
+            id="dateInput"
+            className="rounded-[6px] p-[6px]"
+            onChange={DateFormHandler}
+          />
+        </div>
+        <div className="flex justify-between">
+          <label htmlFor="statusInput">Status: </label>
+          <input
+            type="checkbox"
+            id="statusInput"
+            className="rounded-[6px] p-[6px]"
+            onChange={StatusHandler}
+          />
+        </div>
+      </div>
+      <div className="flex justify-end">
+        <button
+          className="border-[1px] text-[2rem] border-black px-[8px] rounded-[4px]"
+          onClick={SubmitButtonHandler}
+        >
+          Submit
+        </button>
+      </div>
     </form>
   );
 };
