@@ -4,7 +4,7 @@ import { db } from "../config/firebaseConfig";
 import { signOutFromGoogle } from "../config/Auth";
 import { auth } from "../config/firebaseConfig";
 import { getDocs, collection, addDoc } from "firebase/firestore";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 //Icons
 import { CiLogout } from "react-icons/ci";
@@ -22,6 +22,8 @@ const Home = () => {
 
   //user email view
   const [userEmailVisible, setUserEmailVisible] = useState(false);
+
+  const navigate = useNavigate();
 
   const tasksCollectionRef = collection(db, "tasks");
 
@@ -68,6 +70,11 @@ const Home = () => {
     setDoneOrNot(state);
   };
 
+  const signOutHandler = async () => {
+    await signOutFromGoogle();
+    navigate("/login");
+  };
+
   return (
     <section className="bg-gray-500 overflow-hidden flex justify-center min-h-[100vh]">
       <div className=" border-black bg-black border-[10px] rounded-[16px] m-[4px] w-full flex justify-between ">
@@ -99,7 +106,7 @@ const Home = () => {
               </div>
             </div>
             <div className="flex justify-center flex-col gap-[10px] ">
-              <button onClick={signOutFromGoogle}>
+              <button onClick={signOutHandler}>
                 <CiLogout className=" w-ful h-full w-[24px] " />
               </button>
               <hr />
@@ -127,4 +134,3 @@ const Home = () => {
 };
 
 export default Home;
-tasktitle, date, taskDec, doneOrNot

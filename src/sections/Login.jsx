@@ -1,15 +1,13 @@
-import React, { useState } from "react";
-import {
-  createUser,
-  sighInWithGoogle,
-  signOutFromGoogle,
-} from "../config/Auth";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { createUser, sighInWithGoogle } from "../config/Auth";
 import { auth } from "../config/firebaseConfig";
-import { Link } from "react-router-dom";
 
 const Login = () => {
   const [gmail, setGmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
 
   const logInWithEmail = (e) => {
     e.preventDefault();
@@ -30,60 +28,60 @@ const Login = () => {
     setPassword(e.target.value);
   };
 
-  console.log(auth?.currentUser?.email);
+  const googleLoginHandler = async (e) => {
+    await sighInWithGoogle(e);
+    navigate("/");
+  };
+
 
   return (
-    <section className="overflow-hidden bg-yellow-400 p-[20px]">
-      <div className="h-[100vh] rounded-[16px] flex justify-center items-center bg-white">
-        <form
-          action=""
-          className="h-[46%] aspect-[1.4/1] bg-yellow-400 rounded-[16px] flex flex-col justify-around"
-        >
-          <div className="mx-[24px] flex justify-center gap-[18px] flex-col">
-            <input
-              type="text"
-              id="gmail"
-              onChange={gmailChangeHandler}
-              placeholder="Gmail"
-              className="p-[8px] text-white bg-black text-[20px] w-full rounded-[10px]"
-            />
-            <input
-              type="password"
-              onChange={passwordChangeHandler}
-              placeholder="Password"
-              className="p-[8px] text-white bg-black text-[20px] w-full rounded-[10px]"
-            />
-            <div className="flex gap-[24px]">
-              <button
-                className="bg-[black] text-[1.1rem]font-semibold text-white p-[12px] rounded-[18px]"
-                onClick={logInWithEmail}
-              >
-                Sign In
-              </button>
-              <button
-                className="bg-[black] text-[1.1rem]font-semibold text-white p-[12px] rounded-[18px]"
-                onClick={signOutFromGoogle}
-              >
-                Sign Out
-              </button>
-              <Link
-                className="bg-[black] text-[1.1rem]font-semibold text-white p-[12px] rounded-[18px]"
-                to="/"
-              >
-                Go To Home
-              </Link>
+    <section className="overflow-hidden bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
+      <form action="" className="h-[100vh] flex justify-center items-center">
+        <div className="h-[60vh] min-h-[360px] w-[60%] min-w-[330px] max-w-[450px] bg-white rounded-[12px] flex flex-col justify-between p-[8px]">
+          <div className="flex justify-between flex-col gap-[24px]">
+            <h2 className="flex justify-center text-[2.4rem] font-[700]">
+              Login
+            </h2>
+            <hr />
+          </div>
+          <div className=" flex justify-center items-center flex-col gap-[24px]">
+            <div className="w-[80%]">
+              <input
+                type="text"
+                id="username"
+                className="border-0 text-[1.4rem]  w-full"
+                placeholder="Username"
+                onChange={gmailChangeHandler}
+              />
+              <hr className="bg-black h-[2px] w-full" />
+            </div>
+            <div className="w-[80%]">
+              <input
+                type="text"
+                id="password"
+                className="border-0 text-[1.4rem]  w-full"
+                placeholder="Password"
+                onChange={passwordChangeHandler}
+              />
+              <hr className="bg-black h-[2px] w-full" />
             </div>
           </div>
-          <div>
+          <div className="flex flex-col justify-center items-center gap-[24px]">
             <button
-              className="bg-[black] text-[1.1rem] font-semibold mx-[24px] text-white p-[12px]  rounded-[18px]"
-              onClick={sighInWithGoogle}
+              className="bg-blue-500 w-[80%] p-[6px] text-[1.4rem] text-white font-[600] rounded-[28px]"
+              onClick={logInWithEmail}
             >
-              Sign In With google
+              Login
+            </button>
+            <button
+              className="text-black w-[36%] p-[6px] text-[1.4rem] font-[500] rounded-[28px] border-[1px] border-black"
+              onClick={googleLoginHandler}
+            >
+              Google
             </button>
           </div>
-        </form>
-      </div>
+        </div>
+      </form>
     </section>
   );
 };
