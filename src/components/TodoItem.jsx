@@ -21,7 +21,7 @@ const TodoItem = ({ data, getTasksList }) => {
   const updateState = async () => {
     try {
       const taskDoc = doc(db, "tasks", id);
-      await updateDoc(taskDoc, { state: newState });
+      await updateDoc(taskDoc, { status: newState });
       getTasksList();
     } catch (err) {
       console.log(err);
