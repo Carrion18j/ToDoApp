@@ -50,7 +50,7 @@ const Login = () => {
                 type="text"
                 id="username"
                 className="border-0 text-[1.4rem]  w-full"
-                placeholder="Username"
+                placeholder="Username (not working sry)"
                 onChange={gmailChangeHandler}
               />
               <hr className="bg-black h-[2px] w-full" />
@@ -60,7 +60,7 @@ const Login = () => {
                 type="text"
                 id="password"
                 className="border-0 text-[1.4rem]  w-full"
-                placeholder="Password"
+                placeholder="Password (not working sry)"
                 onChange={passwordChangeHandler}
               />
               <hr className="bg-black h-[2px] w-full" />
