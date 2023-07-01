@@ -6,6 +6,8 @@ import { deleteDoc, updateDoc, doc } from "firebase/firestore";
 const TodoItem = ({ data, getTasksList }) => {
   const { description, date: newDate, title, status, id } = data;
 
+  console.log(status)
+
   const [newState, setNewState] = useState(!status);
 
   const deleteTask = async () => {

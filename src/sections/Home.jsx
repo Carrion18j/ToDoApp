@@ -18,7 +18,7 @@ const Home = () => {
   const [tasktitle, setTasktitle] = useState("");
   const [taskDec, setTaskDec] = useState("");
   const [date, setDate] = useState(0);
-  const [doneOrNot, setDoneOrNot] = useState(false);
+  const [doneOrNot, setDoneOrNot] = useState();
 
   //user email view
   const [userEmailVisible, setUserEmailVisible] = useState(false);

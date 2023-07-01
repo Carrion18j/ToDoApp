@@ -96,7 +96,7 @@ const FormWindow = ({ data, formSubmiter }) => {
             onChange={DateFormHandler}
           />
         </div>
-        <div className="flex justify-between flex-wrap">
+        {/* <div className="flex justify-between flex-wrap">
           <label htmlFor="statusInput">Status: </label>
           <input
             type="checkbox"
@@ -104,7 +104,7 @@ const FormWindow = ({ data, formSubmiter }) => {
             className="rounded-[12px] p-[6px] w-[40px]"
             onChange={StatusHandler}
           />
-        </div>
+        </div> */}
       </div>
       <div className="flex justify-between overflow-hidden md:mt-0 mt-[16px]">
         <div></div>

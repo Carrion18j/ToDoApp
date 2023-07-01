@@ -10,6 +10,7 @@ const Button = ({ title, data, style }) => {
     setFormViwe(false);
   };
   const FormData = (e) => {
+    console.log(e);
     data(e);
   };
 
